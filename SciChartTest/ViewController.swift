@@ -123,7 +123,16 @@ class ViewController: UIViewController {
     }
     
     func updateXDateFormat(){
-          self.xAxis.labelProvider = SCITradeChartAxisLabelProvider(labelFormatter: CustomLabelFormatter())
+        var dateFormat = ""
+        switch Int.random(in: 0..<4) {
+        case 0: dateFormat = "HH:mm:ss"
+        case 1: dateFormat = "yyyy"
+        case 2: dateFormat = "d MMM HH:mm"
+        case 3: dateFormat = "dMMM"
+        default: dateFormat = "HH:mm"
+        }
+        
+        self.xAxis.labelProvider = SCITradeChartAxisLabelProvider(labelFormatter: CustomLabelFormatter(dateFormat: dateFormat))
       }
       
      private func removeSeries() {
@@ -162,12 +171,13 @@ class ViewController: UIViewController {
             self?.visibleRange(dataCount: data.count)
             debugPrint("debug_", self?.candleDataSeries.xValues.count, data.count)
             self?.candleDataSeries.insert(x: data.dateData, open: data.openData, high: data.highData, low: data.lowData, close: data.closeData, at: 0)
+            self?.xAxis.updateMeasurements()
         }
     }
     
     func visibleRange(dataCount: Int) {
         let rangeRight = dataCount
-        let rangeLeft = dataCount - 40
+        let rangeLeft = dataCount - Int.random(in: 30..<45)
         
         self.xAxis.visibleRange = SCIDoubleRange(min: Double(rangeLeft), max: Double(rangeRight))
     }
