@@ -9,7 +9,7 @@ target 'SciChartTest' do
   use_frameworks!
 
   # Pods for SciChartTest
-  pod 'SciChart', '~> 3.0.1-nightly'
+  pod 'SciChart', '~> 3.1.0'
   pod 'SnapKit'
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'

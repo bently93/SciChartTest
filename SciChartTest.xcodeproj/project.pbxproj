@@ -31,6 +31,7 @@
 		CB607E7F242CEA35002DB7F0 /* CandleAxisSeriesInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB607E7E242CEA35002DB7F0 /* CandleAxisSeriesInfoProvider.swift */; };
 		CB607E81242CEA8D002DB7F0 /* CustomLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB607E80242CEA8D002DB7F0 /* CustomLabelFormatter.swift */; };
 		CB607E83242CEAD0002DB7F0 /* SCIGestureModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB607E82242CEAD0002DB7F0 /* SCIGestureModifier.swift */; };
+		CBECE3D724975F4F0002C420 /* HorizontalLineAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBECE3D624975F4F0002C420 /* HorizontalLineAnnotation.swift */; };
 		D35A94F8FBF3DE8EBE72520B /* Pods_SciChartTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20B84748520E1B03A8960E5 /* Pods_SciChartTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		CB607E7E242CEA35002DB7F0 /* CandleAxisSeriesInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleAxisSeriesInfoProvider.swift; sourceTree = "<group>"; };
 		CB607E80242CEA8D002DB7F0 /* CustomLabelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelFormatter.swift; sourceTree = "<group>"; };
 		CB607E82242CEAD0002DB7F0 /* SCIGestureModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCIGestureModifier.swift; sourceTree = "<group>"; };
+		CBECE3D624975F4F0002C420 /* HorizontalLineAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLineAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				CB607E7E242CEA35002DB7F0 /* CandleAxisSeriesInfoProvider.swift */,
 				CB607E80242CEA8D002DB7F0 /* CustomLabelFormatter.swift */,
 				CB607E82242CEAD0002DB7F0 /* SCIGestureModifier.swift */,
+				CBECE3D624975F4F0002C420 /* HorizontalLineAnnotation.swift */,
 			);
 			path = SciChartTest;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				CB607E7F242CEA35002DB7F0 /* CandleAxisSeriesInfoProvider.swift in Sources */,
 				CB607E6B242CA86C002DB7F0 /* SCDRandomWalkGenerator.m in Sources */,
 				CB607E71242CA86C002DB7F0 /* SCDTradeData.m in Sources */,
+				CBECE3D724975F4F0002C420 /* HorizontalLineAnnotation.swift in Sources */,
 				CB607E66242CA86C002DB7F0 /* SCDMovingAverage.m in Sources */,
 				CB607E68242CA86C002DB7F0 /* SCDPriceBar.m in Sources */,
 				CB607E83242CEAD0002DB7F0 /* SCIGestureModifier.swift in Sources */,
@@ -563,16 +567,18 @@
 			baseConfigurationReference = 88B6A93C28275129D3D99561 /* Pods-SciChartTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = B92M3CX86P;
 				INFOPLIST_FILE = SciChartTest/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sciChartTest;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.bcs.broker.framework.demo.quotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "BCS Broker Demo App (Development)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SciChartTest/Resources/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -584,16 +590,18 @@
 			baseConfigurationReference = 4C0F9C993237144F9965EE69 /* Pods-SciChartTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = B92M3CX86P;
 				INFOPLIST_FILE = SciChartTest/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sciChartTest;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.bcs.broker.framework.demo.quotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "BCS Broker Demo App (Development)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SciChartTest/Resources/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -35,6 +35,15 @@ class ViewController: UIViewController {
         return yAxis
     }()
     
+    private lazy var horizontalLine: HorizontalLineAnnotation = {
+        let horizontalLine = HorizontalLineAnnotation()
+        horizontalLine.horizontalAlignment = .right
+        horizontalLine.stroke = SCISolidPenStyle(color: UIColor.orange, thickness: 2)
+        let annotationLabel = (self.createLabelWith(text: "Right Aligned Aligned", labelPlacement: .axis))
+        horizontalLine.annotationLabels.add(annotationLabel)
+        return horizontalLine
+    }()
+    
     private(set) var gestureModifier: SCIGestureModifier?
     private(set) var rolloverModifier: SCIRolloverModifier?
     
@@ -169,9 +178,14 @@ class ViewController: UIViewController {
             let data = marketDataService.getHistoricalData( Int.random(in: 100..<1000))
             self?.endDate = data.dateData.getValueAt(data.dateData.count - 1)
             self?.visibleRange(dataCount: data.count)
-            debugPrint("debug_", self?.candleDataSeries.xValues.count, data.count)
             self?.candleDataSeries.insert(x: data.dateData, open: data.openData, high: data.highData, low: data.lowData, close: data.closeData, at: 0)
             self?.xAxis.updateMeasurements()
+            
+            guard let self = self else { return }
+            
+            self.horizontalLine.set(x1: 1)
+            self.horizontalLine.set(y1: data.highData.itemsArray.first ?? 0)
+            self.surface.annotations = SCIAnnotationCollection(collection: [self.horizontalLine])
         }
     }
     
@@ -195,4 +209,14 @@ class ViewController: UIViewController {
         axis.tickLabelStyle = SCIFontStyle(fontDescriptor: UIFont.systemFont(ofSize: 12).fontDescriptor, andTextColor: UIColor.gray)
         return axis
     }
+    
+     fileprivate func createLabelWith(text: String?, labelPlacement: SCILabelPlacement) -> SCIAnnotationLabel {
+            let annotationLabel = SCIAnnotationLabel()
+            if (text != nil) {
+                annotationLabel.text = text!
+            }
+            annotationLabel.labelPlacement = labelPlacement
+    
+            return annotationLabel
+        }
 }
