@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     private var endDate = Date()
     private let disposeBag = DisposeBag()
     
+   private let scatterDataSeries = SCIXyDataSeries(xType: .date, yType: .int)
+    
     private lazy var xAxis: SCICategoryDateAxis = {
         let xAxis: SCICategoryDateAxis = getAxisBase()
         xAxis.growBy = SCIDoubleRange(min: 0.01, max: 0.01)
@@ -164,10 +166,20 @@ class ViewController: UIViewController {
         series.fillDownBrushStyle = SCISolidBrushStyle(color: .red) // цвет заливки красной свечи
         series.dataPointWidth = 0.5
         
+
+        let pointMarker = SCISpritePointMarker(drawer: CustomPointMarkerDrawer(image: #imageLiteral(resourceName: "buyPoint.pdf")))
+        pointMarker.size = CGSize(width: 40, height: 40)
+        
+        let rSeries = SCIXyScatterRenderableSeries()
+        rSeries.dataSeries = scatterDataSeries
+        rSeries.pointMarker = pointMarker
+        
+         
+        
         SCIUpdateSuspender.usingWith(self.surface) { [weak self] in
             guard let self = self else { return }
-            self.surface.renderableSeries.add(series)
-            self.surface.zoomExtentsY() // todo иногда тут крашится
+            self.surface.renderableSeries.add(items: series, rSeries)
+            self.surface.zoomExtentsY()
             self.xAxis.updateMeasurements()
         }
     }
@@ -179,6 +191,7 @@ class ViewController: UIViewController {
             self?.endDate = data.dateData.getValueAt(data.dateData.count - 1)
             self?.visibleRange(dataCount: data.count)
             self?.candleDataSeries.insert(x: data.dateData, open: data.openData, high: data.highData, low: data.lowData, close: data.closeData, at: 0)
+            self?.scatterDataSeries.insert(x: data.dateData, y: data.closeData, at: 0)
             self?.xAxis.updateMeasurements()
             
             guard let self = self else { return }
@@ -219,4 +232,23 @@ class ViewController: UIViewController {
     
             return annotationLabel
         }
+}
+
+
+class CustomPointMarkerDrawer: ISCISpritePointMarkerDrawer {
+    
+    let image: UIImage
+    
+    init(image: UIImage) {
+        self.image = image
+    }
+    
+    func onDraw(_ bitmap: SCIBitmap!, with penStyle: SCIPenStyle!, andBrushStyle brushStyle: SCIBrushStyle!) {
+        bitmap.context.saveGState()
+        let rect = CGRect(origin: .zero, size: CGSize(width: CGFloat(bitmap.width), height: CGFloat(bitmap.height)))
+        bitmap.context.translateBy(x: 0.0, y: CGFloat(bitmap.context.height))
+        bitmap.context.scaleBy(x: 1.0, y: -1.0)
+        bitmap.context.draw(image.cgImage!, in: rect)
+        bitmap.context.restoreGState()
+    }
 }
