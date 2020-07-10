@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     private var endDate = Date()
     private let disposeBag = DisposeBag()
     
-   private let scatterDataSeries = SCIXyDataSeries(xType: .date, yType: .int)
+   private let scatterDataSeries = SCIXyDataSeries(xType: .date, yType: .double)
     
     private lazy var xAxis: SCICategoryDateAxis = {
         let xAxis: SCICategoryDateAxis = getAxisBase()
@@ -191,7 +191,16 @@ class ViewController: UIViewController {
             self?.endDate = data.dateData.getValueAt(data.dateData.count - 1)
             self?.visibleRange(dataCount: data.count)
             self?.candleDataSeries.insert(x: data.dateData, open: data.openData, high: data.highData, low: data.lowData, close: data.closeData, at: 0)
-            self?.scatterDataSeries.insert(x: data.dateData, y: data.closeData, at: 0)
+    
+            
+            for i in 0..<data.dateData.count {
+                if i % 3 == 0 {
+                    let date = data.dateData.getValueAt(i)
+                    let closePrrice =  data.closeData.getValueAt(i)
+                    self?.scatterDataSeries.insert(x: date, y: closePrrice, at: 0)
+                }
+            }
+            
             self?.xAxis.updateMeasurements()
             
             guard let self = self else { return }
